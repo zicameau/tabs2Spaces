@@ -11,17 +11,19 @@ def checkPaths(filePaths):
             corrPaths += [path]
     return corrPaths
 
+
 def parser():
     parser = argparse.ArgumentParser(description='Converts Hard Tabs into Four Spaces for Text Documents')
     parser.add_argument('-fps', '--filePaths', nargs = '+', help='Enter one or more filepaths.', required = True)
     return parser.parse_args()
 
-def tabs2Spaces(filePaths):
-    for pat in filePaths:
-        os.chdir(os.path.dirname(pat))
-        with open(pat, 'r') as fin: 
-            with open(os.path.splitext(pat)[0] + "- Edited.txt", 'w+') as fout:
-                print(os.path.splitext(pat)[0] + "- Edited.txt is being added... )
+
+def tabs2Spaces(pathsExist):
+     for paths in pathsExist:
+        os.chdir(os.path.dirname(paths))
+        with open(paths, 'r') as fin: 
+            with open(os.path.splitext(paths)[0] + "- Edited.txt", 'w+') as fout:
+                print(os.path.splitext(paths)[0] + "- Edited.txt is being added... ")
                 for line in fin:
                     fout.write(line.replace('\t', '    '))
     
@@ -31,6 +33,7 @@ def main():
     filePaths = args.filePaths
     pathsExist = checkPaths(filePaths)
     tabs2Spaces(pathsExist)
+
                 
     
 
